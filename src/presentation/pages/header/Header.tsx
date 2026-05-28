@@ -64,7 +64,7 @@ export function Header({
 
         <nav
           key={locale}
-          className="hidden md:flex items-center gap-1 rounded-full border border-zinc-800/40 bg-zinc-900/50 p-1.5 backdrop-blur-sm"
+          className="hidden min-[1300px]:flex items-center gap-1 rounded-full border border-zinc-800/40 bg-zinc-900/50 p-1.5 backdrop-blur-sm"
           aria-label="Main navigation"
         >
           {navItems.map((item) => {
@@ -120,7 +120,7 @@ export function Header({
 
           <a
             href={headerConfig.CONTACT_HASH}
-            className="hidden sm:flex min-h-11 items-center gap-2 rounded-full border border-zinc-800 bg-zinc-950 px-4 py-2.5 font-mono text-xs font-semibold text-zinc-300 transition-all duration-200 hover:border-indigo-500/50 hover:text-zinc-50 hover:bg-zinc-900"
+            className="hidden min-[1300px]:flex min-h-11 items-center gap-2 rounded-full border border-zinc-800 bg-zinc-950 px-4 py-2.5 font-mono text-xs font-semibold text-zinc-300 transition-all duration-200 hover:border-indigo-500/50 hover:text-zinc-50 hover:bg-zinc-900"
             data-cursor="pointer"
           >
             <Terminal className="h-3.5 w-3.5 text-indigo-400" />
@@ -130,7 +130,7 @@ export function Header({
           <button
             type="button"
             onClick={onToggleMobileMenu}
-            className="flex md:hidden min-h-11 min-w-11 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-950/80 text-zinc-300 transition-colors hover:border-zinc-700 hover:text-zinc-50"
+            className="flex min-[1300px]:hidden min-h-11 min-w-11 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-950/80 text-zinc-300 transition-colors hover:border-zinc-700 hover:text-zinc-50"
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-nav-panel"
             aria-label={
@@ -155,7 +155,7 @@ export function Header({
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm md:hidden"
+              className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm min-[1300px]:hidden"
               aria-label="Close navigation menu"
               onClick={onCloseMobileMenu}
             />
@@ -165,7 +165,7 @@ export function Header({
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={headerConfig.MOBILE_SPRING}
-              className="fixed top-0 right-0 z-50 flex h-full w-[min(100vw-3rem,20rem)] flex-col border-l border-zinc-800/40 bg-zinc-950/95 px-6 pb-8 pt-24 backdrop-blur-md md:hidden"
+              className="fixed top-0 right-0 z-50 flex h-full w-[min(100vw-3rem,20rem)] flex-col border-l border-zinc-800/40 bg-zinc-950/95 px-6 pb-8 pt-24 backdrop-blur-md min-[1300px]:hidden"
               aria-label="Mobile navigation"
             >
               <div className="flex flex-col gap-1">
