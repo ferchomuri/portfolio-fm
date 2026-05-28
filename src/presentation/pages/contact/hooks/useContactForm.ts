@@ -3,7 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { sendContactMessage } from "@/data/repositories/contact-repository";
 import { PROFILE } from "@/data/repositories/profile-repository";
-import { CONTACT_CTA_CONFIG } from "@/presentation/pages/contact/ContactCTAConfig";
+import type { ContactCTAConfig } from "@/presentation/pages/contact/ContactCTAConfig";
 
 export interface ContactFormState {
   readonly email: string;
@@ -17,7 +17,9 @@ export interface ContactFormState {
   readonly onSubmit: (event: FormEvent<HTMLFormElement>) => Promise<void>;
 }
 
-export const useContactForm = (): ContactFormState => {
+export const useContactForm = (
+  config: Pick<ContactCTAConfig, "CONFIG_ERROR" | "SEND_ERROR">,
+): ContactFormState => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -46,8 +48,8 @@ export const useContactForm = (): ContactFormState => {
     } catch (sendError) {
       const message =
         sendError instanceof Error && sendError.message === "EMAIL_CONFIG_MISSING"
-          ? CONTACT_CTA_CONFIG.CONFIG_ERROR
-          : CONTACT_CTA_CONFIG.SEND_ERROR;
+          ? config.CONFIG_ERROR
+          : config.SEND_ERROR;
       setError(message);
     } finally {
       setIsSending(false);

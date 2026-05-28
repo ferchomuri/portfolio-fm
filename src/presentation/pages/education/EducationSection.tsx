@@ -1,19 +1,20 @@
 import { motion } from "framer-motion";
 import { GraduationCap, Award } from "lucide-react";
 import { fadeInUp, staggerContainer, VIEWPORT_ONCE } from "@/presentation/animations/MotionConfig";
-import {
-  EDUCATION_SECTION_CONFIG,
-  type EducationItemConfig,
+import type {
+  EducationItemConfig,
+  EducationSectionConfig,
 } from "@/presentation/pages/education/EducationSectionConfig";
 
 export interface EducationSectionProps {
+  readonly sectionConfig: EducationSectionConfig;
   readonly items: readonly EducationItemConfig[];
 }
 
-export function EducationSection({ items }: EducationSectionProps) {
+export function EducationSection({ sectionConfig, items }: EducationSectionProps) {
   return (
     <section
-      id={EDUCATION_SECTION_CONFIG.SECTION_ID}
+      id={sectionConfig.SECTION_ID}
       className="relative w-full overflow-hidden px-6 py-24 md:px-12 bg-zinc-950/20"
     >
       <div className="max-w-7xl mx-auto w-full">
@@ -29,21 +30,21 @@ export function EducationSection({ items }: EducationSectionProps) {
             className="flex items-center gap-2 text-indigo-400 font-mono text-xs font-bold tracking-widest"
           >
             <GraduationCap className="h-4 w-4" />
-            <span>{EDUCATION_SECTION_CONFIG.EYEBROW}</span>
+            <span>{sectionConfig.EYEBROW}</span>
           </motion.div>
 
           <motion.h2
             variants={fadeInUp}
             className="text-3xl font-extrabold tracking-tight text-zinc-100 sm:text-4xl"
           >
-            {EDUCATION_SECTION_CONFIG.TITLE}
+            {sectionConfig.TITLE}
           </motion.h2>
 
           <motion.p
             variants={fadeInUp}
             className="max-w-2xl text-sm text-zinc-400 leading-relaxed font-sans"
           >
-            {EDUCATION_SECTION_CONFIG.DESCRIPTION}
+            {sectionConfig.DESCRIPTION}
           </motion.p>
         </motion.div>
 

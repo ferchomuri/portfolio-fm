@@ -1,13 +1,21 @@
 "use client";
 
 import { SystemStatusSection } from "@/presentation/pages/system-status/SystemStatusSection";
-import { SYSTEM_STATUS_SECTION_CONFIG } from "@/presentation/pages/system-status/SystemStatusSectionConfig";
+import { getSystemStatusSectionConfig } from "@/presentation/pages/system-status/SystemStatusSectionConfig";
 import { SystemStatusMetricCardContainer } from "@/presentation/pages/system-status/SystemStatusMetricCardContainer";
+import { useI18n } from "@/presentation/i18n";
 
 export function SystemStatusSectionContainer() {
-  const metricCards = SYSTEM_STATUS_SECTION_CONFIG.METRICS.map((metric) => (
-    <SystemStatusMetricCardContainer key={metric.label} metric={metric} />
+  const { locale } = useI18n();
+  const sectionConfig = getSystemStatusSectionConfig(locale);
+
+  const metricCards = sectionConfig.METRICS.map((metric) => (
+    <SystemStatusMetricCardContainer
+      key={metric.label}
+      metric={metric}
+      footerLog={sectionConfig.FOOTER_LOG}
+    />
   ));
 
-  return <SystemStatusSection metricCards={metricCards} />;
+  return <SystemStatusSection sectionConfig={sectionConfig} metricCards={metricCards} />;
 }

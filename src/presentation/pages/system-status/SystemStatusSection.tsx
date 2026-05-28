@@ -2,16 +2,17 @@ import type { ReactNode } from "react";
 import { motion } from "framer-motion";
 import { Activity } from "lucide-react";
 import { fadeInUp, staggerContainer, VIEWPORT_ONCE } from "@/presentation/animations/MotionConfig";
-import { SYSTEM_STATUS_SECTION_CONFIG } from "@/presentation/pages/system-status/SystemStatusSectionConfig";
+import type { SystemStatusSectionConfig } from "@/presentation/pages/system-status/SystemStatusSectionConfig";
 
 export interface SystemStatusSectionProps {
+  readonly sectionConfig: SystemStatusSectionConfig;
   readonly metricCards: readonly ReactNode[];
 }
 
-export function SystemStatusSection({ metricCards }: SystemStatusSectionProps) {
+export function SystemStatusSection({ sectionConfig, metricCards }: SystemStatusSectionProps) {
   return (
     <section
-      id={SYSTEM_STATUS_SECTION_CONFIG.SECTION_ID}
+      id={sectionConfig.SECTION_ID}
       className="relative w-full overflow-hidden px-6 py-24 md:px-12 bg-zinc-950/30"
     >
       <div className="max-w-7xl mx-auto w-full">
@@ -27,21 +28,21 @@ export function SystemStatusSection({ metricCards }: SystemStatusSectionProps) {
             className="flex items-center gap-2 text-indigo-400 font-mono text-xs font-bold tracking-widest"
           >
             <Activity className="h-4 w-4" />
-            <span>{SYSTEM_STATUS_SECTION_CONFIG.EYEBROW}</span>
+            <span>{sectionConfig.EYEBROW}</span>
           </motion.div>
 
           <motion.h2
             variants={fadeInUp}
             className="text-3xl font-extrabold tracking-tight text-zinc-100 sm:text-4xl"
           >
-            {SYSTEM_STATUS_SECTION_CONFIG.TITLE}
+            {sectionConfig.TITLE}
           </motion.h2>
 
           <motion.p
             variants={fadeInUp}
             className="max-w-2xl text-sm text-zinc-400 leading-relaxed"
           >
-            {SYSTEM_STATUS_SECTION_CONFIG.DESCRIPTION}
+            {sectionConfig.DESCRIPTION}
           </motion.p>
         </motion.div>
 

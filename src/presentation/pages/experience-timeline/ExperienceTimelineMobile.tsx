@@ -1,14 +1,21 @@
 import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer, VIEWPORT_ONCE } from "@/presentation/animations/MotionConfig";
-import type { ExperienceMilestone } from "@/presentation/pages/experience-timeline/ExperienceTimelineConfig";
+import type {
+  ExperienceMilestone,
+  ExperienceTimelineConfig,
+} from "@/presentation/pages/experience-timeline/ExperienceTimelineConfig";
 import { ExperienceTimelineHeader } from "@/presentation/pages/experience-timeline/ExperienceTimelineHeader";
 import { ExperienceTimelineMilestoneCard } from "@/presentation/pages/experience-timeline/ExperienceTimelineMilestoneCard";
 
 export interface ExperienceTimelineMobileProps {
+  readonly sectionConfig: ExperienceTimelineConfig;
   readonly milestones: readonly ExperienceMilestone[];
 }
 
-export function ExperienceTimelineMobile({ milestones }: ExperienceTimelineMobileProps) {
+export function ExperienceTimelineMobile({
+  sectionConfig,
+  milestones,
+}: ExperienceTimelineMobileProps) {
   return (
     <section className="relative w-full overflow-hidden px-6 py-20 md:px-12 md:py-24 bg-zinc-950/20 lg:hidden">
       <div className="max-w-7xl mx-auto w-full">
@@ -20,7 +27,7 @@ export function ExperienceTimelineMobile({ milestones }: ExperienceTimelineMobil
           className="mb-10"
         >
           <motion.div variants={fadeInUp}>
-            <ExperienceTimelineHeader />
+            <ExperienceTimelineHeader sectionConfig={sectionConfig} />
           </motion.div>
         </motion.div>
 

@@ -2,10 +2,11 @@ import type { FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, Terminal as TerminalIcon, ShieldAlert, Cpu } from "lucide-react";
 import { staggerContainer, VIEWPORT_ONCE } from "@/presentation/animations/MotionConfig";
-import { CONTACT_CTA_CONFIG } from "@/presentation/pages/contact/ContactCTAConfig";
+import type { ContactCTAConfig } from "@/presentation/pages/contact/ContactCTAConfig";
 import type { ContactBootState } from "@/presentation/pages/contact/hooks/useContactBootSequence";
 
 export interface ContactCTAProps {
+  readonly sectionConfig: ContactCTAConfig;
   readonly bootState: ContactBootState;
   readonly bootLogs: readonly string[];
   readonly email: string;
@@ -20,6 +21,7 @@ export interface ContactCTAProps {
 }
 
 export function ContactCTA({
+  sectionConfig,
   bootState,
   bootLogs,
   email,
@@ -34,7 +36,7 @@ export function ContactCTA({
 }: ContactCTAProps) {
   return (
     <section
-      id={CONTACT_CTA_CONFIG.SECTION_ID}
+      id={sectionConfig.SECTION_ID}
       className="relative w-full overflow-hidden px-6 py-24 md:px-12 bg-zinc-950/20"
     >
       <div className="max-w-2xl mx-auto w-full">
@@ -47,13 +49,13 @@ export function ContactCTA({
         >
           <div className="flex justify-center items-center gap-2 text-indigo-400 font-mono text-xs font-bold tracking-widest">
             <TerminalIcon className="h-4 w-4" />
-            <span>{CONTACT_CTA_CONFIG.EYEBROW}</span>
+            <span>{sectionConfig.EYEBROW}</span>
           </div>
           <h2 className="text-3xl font-extrabold tracking-tight text-zinc-100 sm:text-4xl">
-            {CONTACT_CTA_CONFIG.TITLE}
+            {sectionConfig.TITLE}
           </h2>
           <p className="max-w-md mx-auto text-sm text-zinc-400 leading-relaxed font-sans">
-            {CONTACT_CTA_CONFIG.DESCRIPTION}
+            {sectionConfig.DESCRIPTION}
           </p>
         </motion.div>
 
@@ -66,7 +68,7 @@ export function ContactCTA({
             <div className="flex items-center gap-2">
               <span className="h-2.5 w-2.5 rounded-full bg-indigo-500 animate-pulse" />
               <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-500">
-                {CONTACT_CTA_CONFIG.CONSOLE_LABEL}
+                {sectionConfig.CONSOLE_LABEL}
               </span>
             </div>
             <div className="flex gap-1.5">
@@ -85,7 +87,7 @@ export function ContactCTA({
                   exit={{ opacity: 0 }}
                   className="font-mono text-[10px] text-zinc-400 space-y-2 min-h-[140px]"
                 >
-                  <div className="text-zinc-600">{CONTACT_CTA_CONFIG.BOOT_COMMAND}</div>
+                  <div className="text-zinc-600">{sectionConfig.BOOT_COMMAND}</div>
                   {bootLogs.map((log, i) => {
                     const isSuccess = log.includes("✔");
                     return (
@@ -111,10 +113,10 @@ export function ContactCTA({
                     <Cpu className="h-6 w-6 animate-pulse" />
                   </div>
                   <h3 className="font-mono text-xs font-bold text-zinc-100 uppercase tracking-widest">
-                    {CONTACT_CTA_CONFIG.SUCCESS_TITLE}
+                    {sectionConfig.SUCCESS_TITLE}
                   </h3>
                   <p className="max-w-xs mx-auto font-sans text-xs text-zinc-400 leading-relaxed">
-                    {CONTACT_CTA_CONFIG.SUCCESS_MESSAGE}
+                    {sectionConfig.SUCCESS_MESSAGE}
                   </p>
                 </motion.div>
               ) : (
@@ -128,7 +130,7 @@ export function ContactCTA({
                 >
                   <div className="flex items-center gap-3 rounded-lg border border-zinc-900 bg-zinc-900/10 px-3.5 py-2.5 text-zinc-500">
                     <ShieldAlert className="h-4 w-4 text-indigo-400/80 shrink-0" />
-                    <span>{CONTACT_CTA_CONFIG.HANDSHAKE_WARNING}</span>
+                    <span>{sectionConfig.HANDSHAKE_WARNING}</span>
                   </div>
 
                   {error && (
@@ -141,14 +143,14 @@ export function ContactCTA({
                         rel="noopener noreferrer"
                         data-cursor="pointer"
                       >
-                        {CONTACT_CTA_CONFIG.LINKEDIN_FALLBACK_LABEL}
+                        {sectionConfig.LINKEDIN_FALLBACK_LABEL}
                       </a>
                     </div>
                   )}
 
                   <div className="space-y-1.5">
                     <label htmlFor="email" className="block text-zinc-500 uppercase font-semibold">
-                      {CONTACT_CTA_CONFIG.EMAIL_LABEL}
+                      {sectionConfig.EMAIL_LABEL}
                     </label>
                     <input
                       id="email"
@@ -158,14 +160,14 @@ export function ContactCTA({
                       required
                       value={email}
                       onChange={(e) => onEmailChange(e.target.value)}
-                      placeholder={CONTACT_CTA_CONFIG.EMAIL_PLACEHOLDER}
+                      placeholder={sectionConfig.EMAIL_PLACEHOLDER}
                       className="w-full rounded-lg border border-zinc-900 bg-black/60 px-3 py-2 text-zinc-100 placeholder-zinc-700 transition-all duration-200 focus:border-indigo-500/50 focus:outline-none"
                     />
                   </div>
 
                   <div className="space-y-1.5">
                     <label htmlFor="message" className="block text-zinc-500 uppercase font-semibold">
-                      {CONTACT_CTA_CONFIG.MESSAGE_LABEL}
+                      {sectionConfig.MESSAGE_LABEL}
                     </label>
                     <textarea
                       id="message"
@@ -175,7 +177,7 @@ export function ContactCTA({
                       required
                       value={message}
                       onChange={(e) => onMessageChange(e.target.value)}
-                      placeholder={CONTACT_CTA_CONFIG.MESSAGE_PLACEHOLDER}
+                      placeholder={sectionConfig.MESSAGE_PLACEHOLDER}
                       className="w-full rounded-lg border border-zinc-900 bg-black/60 px-3 py-2 text-zinc-100 placeholder-zinc-700 transition-all duration-200 focus:border-indigo-500/50 focus:outline-none resize-none"
                     />
                   </div>
@@ -188,8 +190,8 @@ export function ContactCTA({
                   >
                     <span>
                       {isSending
-                        ? CONTACT_CTA_CONFIG.SUBMITTING_LABEL
-                        : CONTACT_CTA_CONFIG.SUBMIT_LABEL}
+                        ? sectionConfig.SUBMITTING_LABEL
+                        : sectionConfig.SUBMIT_LABEL}
                     </span>
                     <Send className="h-3.5 w-3.5 text-white transition-transform duration-300 group-hover:translate-x-0.5" />
                   </button>

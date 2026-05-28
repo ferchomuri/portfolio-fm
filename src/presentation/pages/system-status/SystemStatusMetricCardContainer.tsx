@@ -7,12 +7,17 @@ import { FeatureIcon } from "@/presentation/components/feature-icon";
 
 export interface SystemStatusMetricCardContainerProps {
   readonly metric: SystemStatusMetricConfig;
+  readonly footerLog: string;
 }
 
-export function SystemStatusMetricCardContainer({ metric }: SystemStatusMetricCardContainerProps) {
+export function SystemStatusMetricCardContainer({
+  metric,
+  footerLog,
+}: SystemStatusMetricCardContainerProps) {
   const spotlight = useSpotlightCoords();
   return (
     <SystemStatusMetricCard
+      footerLog={footerLog}
       icon={<FeatureIcon name={metric.iconName} className="h-5 w-5 text-indigo-400" />}
       label={metric.label}
       value={metric.value}

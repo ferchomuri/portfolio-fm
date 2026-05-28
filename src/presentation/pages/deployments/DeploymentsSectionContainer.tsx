@@ -1,8 +1,18 @@
 "use client";
 
 import { DeploymentsSection } from "@/presentation/pages/deployments/DeploymentsSection";
-import { DEPLOYMENTS_SECTION_CONFIG } from "@/presentation/pages/deployments/DeploymentsSectionConfig";
+import { getDeploymentsSectionConfig } from "@/presentation/pages/deployments/DeploymentsSectionConfig";
+import { useI18n } from "@/presentation/i18n";
 
 export function DeploymentsSectionContainer() {
-  return <DeploymentsSection projects={DEPLOYMENTS_SECTION_CONFIG.PROJECTS} />;
+  const { locale } = useI18n();
+  const sectionConfig = getDeploymentsSectionConfig(locale);
+
+  return (
+    <DeploymentsSection
+      key={locale}
+      sectionConfig={sectionConfig}
+      projects={sectionConfig.PROJECTS}
+    />
+  );
 }

@@ -3,22 +3,26 @@
 import { useMemo, useState } from "react";
 import { ArchitecturePlayground } from "@/presentation/pages/architecture-playground/ArchitecturePlayground";
 import {
-  ARCHITECTURE_PLAYGROUND_CONFIG,
+  getArchitecturePlaygroundConfig,
   getArchitectureNodesForMode,
   getDefaultNodeIdForMode,
 } from "@/presentation/pages/architecture-playground/ArchitecturePlaygroundConfig";
 import { buildArchitectureConnections } from "@/domain/services/build-architecture-connections";
 import type { ArchitectureMode } from "@/domain/types/architecture-playground";
+import { useI18n } from "@/presentation/i18n";
 
 export function ArchitecturePlaygroundContainer() {
-  const [activeMode, setActiveMode] = useState<ArchitectureMode>(
-    ARCHITECTURE_PLAYGROUND_CONFIG.DEFAULT_MODE,
-  );
+  const { locale } = useI18n();
+  const sectionConfig = getArchitecturePlaygroundConfig(locale);
+  const [activeMode, setActiveMode] = useState<ArchitectureMode>(sectionConfig.DEFAULT_MODE);
   const [activeNodeId, setActiveNodeId] = useState<string>(
-    getDefaultNodeIdForMode(ARCHITECTURE_PLAYGROUND_CONFIG.DEFAULT_MODE),
+    getDefaultNodeIdForMode(locale, sectionConfig.DEFAULT_MODE),
   );
 
-  const nodes = useMemo(() => getArchitectureNodesForMode(activeMode), [activeMode]);
+  const nodes = useMemo(
+    () => getArchitectureNodesForMode(locale, activeMode),
+    [activeMode, locale],
+  );
 
   const connections = useMemo(
     () => buildArchitectureConnections(activeMode, nodes),
@@ -37,18 +41,20 @@ export function ArchitecturePlaygroundContainer() {
 
   const handleSelectMode = (mode: ArchitectureMode) => {
     setActiveMode(mode);
-    setActiveNodeId(getDefaultNodeIdForMode(mode));
+    setActiveNodeId(getDefaultNodeIdForMode(locale, mode));
   };
 
   return (
     <ArchitecturePlayground
+      key={locale}
+      sectionConfig={sectionConfig}
       activeMode={activeMode}
       activeNodeId={activeNodeId}
-      modes={ARCHITECTURE_PLAYGROUND_CONFIG.MODES}
+      modes={sectionConfig.MODES}
       nodes={nodes}
       connections={connections}
-      explanation={ARCHITECTURE_PLAYGROUND_CONFIG.EXPLANATIONS[activeMode]}
-      stats={ARCHITECTURE_PLAYGROUND_CONFIG.STATS[activeMode]}
+      explanation={sectionConfig.EXPLANATIONS[activeMode]}
+      stats={sectionConfig.STATS[activeMode]}
       selectedNode={selectedNode}
       onSelectMode={handleSelectMode}
       onSelectNode={setActiveNodeId}

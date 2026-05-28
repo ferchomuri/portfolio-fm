@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Layout, Info } from "lucide-react";
 import { fadeInUp, staggerContainer, VIEWPORT_ONCE } from "@/presentation/animations/MotionConfig";
-import { ARCHITECTURE_PLAYGROUND_CONFIG } from "@/presentation/pages/architecture-playground/ArchitecturePlaygroundConfig";
+import type { ArchitecturePlaygroundConfig } from "@/presentation/pages/architecture-playground/ArchitecturePlaygroundConfig";
 import type {
   ArchitectureConnection,
   ArchitectureMode,
@@ -11,6 +11,7 @@ import type {
 } from "@/domain/types/architecture-playground";
 
 export interface ArchitecturePlaygroundProps {
+  readonly sectionConfig: ArchitecturePlaygroundConfig;
   readonly activeMode: ArchitectureMode;
   readonly activeNodeId: string;
   readonly modes: readonly ArchitectureModeOption[];
@@ -24,6 +25,7 @@ export interface ArchitecturePlaygroundProps {
 }
 
 export function ArchitecturePlayground({
+  sectionConfig,
   activeMode,
   activeNodeId,
   modes,
@@ -37,7 +39,7 @@ export function ArchitecturePlayground({
 }: ArchitecturePlaygroundProps) {
   return (
     <section
-      id={ARCHITECTURE_PLAYGROUND_CONFIG.SECTION_ID}
+      id={sectionConfig.SECTION_ID}
       className="relative w-full overflow-hidden px-6 py-24 md:px-12 bg-zinc-950/30"
     >
       <div className="max-w-7xl mx-auto w-full">
@@ -53,19 +55,19 @@ export function ArchitecturePlayground({
             className="flex items-center gap-2 text-indigo-400 font-mono text-xs font-bold tracking-widest"
           >
             <Layout className="h-4 w-4" />
-            <span>{ARCHITECTURE_PLAYGROUND_CONFIG.EYEBROW}</span>
+            <span>{sectionConfig.EYEBROW}</span>
           </motion.div>
           <motion.h2
             variants={fadeInUp}
             className="text-3xl font-extrabold tracking-tight text-zinc-100 sm:text-4xl"
           >
-            {ARCHITECTURE_PLAYGROUND_CONFIG.TITLE}
+            {sectionConfig.TITLE}
           </motion.h2>
           <motion.p
             variants={fadeInUp}
             className="max-w-2xl text-sm text-zinc-400 leading-relaxed font-sans"
           >
-            {ARCHITECTURE_PLAYGROUND_CONFIG.DESCRIPTION}
+            {sectionConfig.DESCRIPTION}
           </motion.p>
         </motion.div>
 
@@ -225,7 +227,7 @@ export function ArchitecturePlayground({
 
             <div className="flex items-center gap-2 border-t border-zinc-900 pt-3 text-[9px] font-mono text-zinc-600">
               <Info className="h-3 w-3" />
-              <span>{ARCHITECTURE_PLAYGROUND_CONFIG.CANVAS_HINT}</span>
+              <span>{sectionConfig.CANVAS_HINT}</span>
             </div>
           </div>
 
@@ -233,7 +235,7 @@ export function ArchitecturePlayground({
             <div className="space-y-4">
               <div className="flex items-center justify-between border-b border-zinc-900 pb-3">
                 <span className="font-mono text-xs font-bold text-zinc-300 uppercase">
-                  {ARCHITECTURE_PLAYGROUND_CONFIG.SPECS_TITLE}
+                  {sectionConfig.SPECS_TITLE}
                 </span>
                 <span className="font-mono text-[9px] text-indigo-400 font-semibold bg-indigo-950/20 px-2.5 py-0.5 rounded-full border border-indigo-500/15">
                   {activeMode.toUpperCase()}
@@ -256,7 +258,7 @@ export function ArchitecturePlayground({
             <div className="rounded-xl border border-zinc-900 bg-black p-4 font-mono text-[10px] text-zinc-400 shadow-inner flex-1 flex flex-col justify-between">
               <div>
                 <div className="mb-3 flex items-center justify-between border-b border-zinc-900 pb-2">
-                  <span className="text-zinc-500">{ARCHITECTURE_PLAYGROUND_CONFIG.TELEMETRY_TITLE}</span>
+                  <span className="text-zinc-500">{sectionConfig.TELEMETRY_TITLE}</span>
                   <span className="text-indigo-400">{selectedNode.id.toUpperCase()}</span>
                 </div>
                 <div className="space-y-2">
@@ -268,7 +270,7 @@ export function ArchitecturePlayground({
                     <span className="text-zinc-500">Status:</span>
                     <span className="text-emerald-400 font-bold flex items-center gap-1">
                       <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-ping" />
-                      {ARCHITECTURE_PLAYGROUND_CONFIG.TELEMETRY_STATUS}
+                      {sectionConfig.TELEMETRY_STATUS}
                     </span>
                   </div>
                   <div className="flex justify-between">
@@ -281,7 +283,7 @@ export function ArchitecturePlayground({
               </div>
 
               <div className="mt-4 border-t border-zinc-900 pt-3 text-[9px] text-zinc-600">
-                {ARCHITECTURE_PLAYGROUND_CONFIG.TELEMETRY_FOOTER}
+                {sectionConfig.TELEMETRY_FOOTER}
               </div>
             </div>
           </div>

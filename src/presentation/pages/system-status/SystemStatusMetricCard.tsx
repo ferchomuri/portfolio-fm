@@ -2,9 +2,8 @@ import type { ReactNode } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { hoverLiftCard } from "@/presentation/animations/MotionConfig";
-import { SYSTEM_STATUS_SECTION_CONFIG } from "@/presentation/pages/system-status/SystemStatusSectionConfig";
-
 export interface SystemStatusMetricCardProps {
+  readonly footerLog: string;
   readonly icon: ReactNode;
   readonly label: string;
   readonly value: string;
@@ -19,6 +18,7 @@ export interface SystemStatusMetricCardProps {
 }
 
 export function SystemStatusMetricCard({
+  footerLog,
   icon,
   label,
   value,
@@ -71,7 +71,7 @@ export function SystemStatusMetricCard({
       </div>
 
       <div className="mt-6 flex items-center justify-between border-t border-zinc-900 pt-4 text-[10px] font-mono text-zinc-500">
-        <span>{SYSTEM_STATUS_SECTION_CONFIG.FOOTER_LOG}</span>
+        <span>{footerLog}</span>
         <ArrowUpRight className="h-3 w-3 text-zinc-600 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
       </div>
     </motion.div>

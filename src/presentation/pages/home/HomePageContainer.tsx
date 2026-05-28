@@ -1,3 +1,5 @@
+"use client";
+
 import { AILabSectionContainer } from "@/presentation/pages/ai-lab";
 import { ArchitecturePlaygroundContainer } from "@/presentation/pages/architecture-playground";
 import { CapabilitiesSectionContainer } from "@/presentation/pages/capabilities";
@@ -9,18 +11,19 @@ import { ExperienceTimelineContainer } from "@/presentation/pages/experience-tim
 import { FooterContainer } from "@/presentation/pages/footer";
 import { HeaderContainer } from "@/presentation/pages/header";
 import { HeroSectionContainer } from "@/presentation/pages/hero";
-import { HomePage } from "@/presentation/pages/home/HomePage";
+import { HOME_PAGE_CONFIG } from "@/presentation/pages/home/HomePageConfig";
 import { SmoothScrollContainer } from "@/presentation/components/smooth-scroll";
 import { SystemStatusSectionContainer } from "@/presentation/pages/system-status";
+import { I18nProvider } from "@/presentation/i18n";
 
 export function HomePageContainer() {
   return (
-    <SmoothScrollContainer>
-      <HomePage
-        customCursor={<CustomCursorContainer />}
-        header={<HeaderContainer />}
-        main={
-          <>
+    <I18nProvider>
+      <SmoothScrollContainer>
+        <CustomCursorContainer />
+        <div className={HOME_PAGE_CONFIG.SHELL_CLASS}>
+          <HeaderContainer />
+          <main className={HOME_PAGE_CONFIG.MAIN_CLASS}>
             <HeroSectionContainer />
             <SystemStatusSectionContainer />
             <CapabilitiesSectionContainer />
@@ -30,10 +33,10 @@ export function HomePageContainer() {
             <ArchitecturePlaygroundContainer />
             <AILabSectionContainer />
             <ContactCTAContainer />
-          </>
-        }
-        footer={<FooterContainer />}
-      />
-    </SmoothScrollContainer>
+          </main>
+          <FooterContainer />
+        </div>
+      </SmoothScrollContainer>
+    </I18nProvider>
   );
 }

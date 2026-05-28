@@ -3,32 +3,35 @@
 import { useMemo, useState } from "react";
 import { CapabilitiesSection } from "@/presentation/pages/capabilities/CapabilitiesSection";
 import {
-  CAPABILITIES_SECTION_CONFIG,
+  getCapabilitiesSectionConfig,
   type CapabilityCategoryId,
 } from "@/presentation/pages/capabilities/CapabilitiesSectionConfig";
 import { FeatureIcon } from "@/presentation/components/feature-icon";
+import { useI18n } from "@/presentation/i18n";
 
 export function CapabilitiesSectionContainer() {
-  const [activeCategory, setActiveCategory] = useState<string>(
-    CAPABILITIES_SECTION_CONFIG.DEFAULT_CATEGORY_ID,
-  );
+  const { locale } = useI18n();
+  const sectionConfig = getCapabilitiesSectionConfig(locale);
+  const [activeCategory, setActiveCategory] = useState(sectionConfig.DEFAULT_CATEGORY_ID);
 
   const categories = useMemo(
     () =>
-      CAPABILITIES_SECTION_CONFIG.CATEGORIES.map((category) => ({
+      sectionConfig.CATEGORIES.map((category) => ({
         id: category.id,
         label: category.label,
         icon: <FeatureIcon name={category.iconName} className="h-4 w-4" />,
       })),
-    [],
+    [sectionConfig.CATEGORIES],
   );
 
   const activeCapabilities =
-    CAPABILITIES_SECTION_CONFIG.CAPABILITIES[activeCategory as CapabilityCategoryId] ??
-    CAPABILITIES_SECTION_CONFIG.CAPABILITIES.frontend;
+    sectionConfig.CAPABILITIES[activeCategory as CapabilityCategoryId] ??
+    sectionConfig.CAPABILITIES.frontend;
 
   return (
     <CapabilitiesSection
+      key={locale}
+      sectionConfig={sectionConfig}
       categories={categories}
       activeCategory={activeCategory}
       activeCapabilities={activeCapabilities}

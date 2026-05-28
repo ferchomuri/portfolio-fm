@@ -1,11 +1,12 @@
 import type { RefObject } from "react";
 import { motion, type MotionValue } from "framer-motion";
 import type { ExperienceMilestone } from "@/presentation/pages/experience-timeline/ExperienceTimelineConfig";
-import { EXPERIENCE_TIMELINE_CONFIG } from "@/presentation/pages/experience-timeline/ExperienceTimelineConfig";
+import type { ExperienceTimelineConfig } from "@/presentation/pages/experience-timeline/ExperienceTimelineConfig";
 import { ExperienceTimelineHeader } from "@/presentation/pages/experience-timeline/ExperienceTimelineHeader";
 import { ExperienceTimelineMilestoneCard } from "@/presentation/pages/experience-timeline/ExperienceTimelineMilestoneCard";
 
 export interface ExperienceTimelineDesktopProps {
+  readonly sectionConfig: ExperienceTimelineConfig;
   readonly milestones: readonly ExperienceMilestone[];
   readonly containerRef: RefObject<HTMLDivElement | null>;
   readonly translateX: MotionValue<string>;
@@ -13,6 +14,7 @@ export interface ExperienceTimelineDesktopProps {
 }
 
 export function ExperienceTimelineDesktop({
+  sectionConfig,
   milestones,
   containerRef,
   translateX,
@@ -26,7 +28,7 @@ export function ExperienceTimelineDesktop({
       <div className="sticky top-0 flex h-screen max-h-screen w-full flex-col overflow-hidden bg-zinc-950/20">
         <div className="w-full shrink-0 px-6 pt-20 md:px-12 md:pt-24 z-20">
           <div className="max-w-7xl mx-auto w-full">
-            <ExperienceTimelineHeader />
+            <ExperienceTimelineHeader sectionConfig={sectionConfig} />
           </div>
         </div>
 
@@ -47,8 +49,8 @@ export function ExperienceTimelineDesktop({
         <div className="w-full shrink-0 px-6 pb-10 pt-4 md:px-12 md:pb-16 z-20">
           <div className="max-w-7xl mx-auto w-full flex flex-col gap-2 font-mono text-[9px] text-zinc-500">
             <div className="flex items-center justify-between gap-4">
-              <span className="truncate">{EXPERIENCE_TIMELINE_CONFIG.PROGRESS_LABEL}</span>
-              <span className="shrink-0">{EXPERIENCE_TIMELINE_CONFIG.MILESTONE_COUNT_LABEL}</span>
+              <span className="truncate">{sectionConfig.PROGRESS_LABEL}</span>
+              <span className="shrink-0">{sectionConfig.MILESTONE_COUNT_LABEL}</span>
             </div>
             <div className="h-1 w-full rounded-full bg-zinc-900 overflow-hidden border border-zinc-800/10">
               <motion.div

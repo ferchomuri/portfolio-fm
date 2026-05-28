@@ -1,8 +1,12 @@
 "use client";
 
 import { EducationSection } from "@/presentation/pages/education/EducationSection";
-import { EDUCATION_SECTION_CONFIG } from "@/presentation/pages/education/EducationSectionConfig";
+import { getEducationSectionConfig } from "@/presentation/pages/education/EducationSectionConfig";
+import { useI18n } from "@/presentation/i18n";
 
 export function EducationSectionContainer() {
-  return <EducationSection items={EDUCATION_SECTION_CONFIG.ITEMS} />;
+  const { locale } = useI18n();
+  const sectionConfig = getEducationSectionConfig(locale);
+
+  return <EducationSection key={locale} sectionConfig={sectionConfig} items={sectionConfig.ITEMS} />;
 }

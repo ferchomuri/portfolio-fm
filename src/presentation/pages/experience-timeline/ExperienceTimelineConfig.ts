@@ -1,4 +1,5 @@
 import { SECTION_IDS } from "@/domain/constants/sections";
+import { I18N_LOCALES, type Locale } from "@/presentation/i18n";
 
 export interface ExperienceMilestone {
   readonly year: string;
@@ -8,7 +9,17 @@ export interface ExperienceMilestone {
   readonly bullets: readonly string[];
 }
 
-export const EXPERIENCE_TIMELINE_CONFIG = {
+export interface ExperienceTimelineConfig {
+  readonly SECTION_ID: string;
+  readonly EYEBROW: string;
+  readonly TITLE: string;
+  readonly DESCRIPTION: string;
+  readonly PROGRESS_LABEL: string;
+  readonly MILESTONE_COUNT_LABEL: string;
+  readonly MILESTONES: readonly ExperienceMilestone[];
+}
+
+const EXPERIENCE_TIMELINE_CONFIG_EN: ExperienceTimelineConfig = {
   SECTION_ID: SECTION_IDS.TIMELINE,
   EYEBROW: "03 // PROFESSIONAL STORY TIMELINE",
   TITLE: "System Architecture Journey",
@@ -64,5 +75,74 @@ export const EXPERIENCE_TIMELINE_CONFIG = {
         "Automated operational tasks with scripting and workflow improvements.",
       ],
     },
-  ] satisfies readonly ExperienceMilestone[],
+  ],
 };
+
+const EXPERIENCE_TIMELINE_CONFIG_ES: ExperienceTimelineConfig = {
+  SECTION_ID: SECTION_IDS.TIMELINE,
+  EYEBROW: "03 // LINEA DE TIEMPO PROFESIONAL",
+  TITLE: "Trayectoria de Arquitectura de Sistemas",
+  DESCRIPTION:
+    "Desplazate hacia abajo para avanzar en la linea de tiempo. Explora hitos, stacks tecnologicos y proyectos modulares.",
+  PROGRESS_LABEL: "PROGRESO TIMELINE // STREAM ACTIVO",
+  MILESTONE_COUNT_LABEL: "hitos: 04",
+  MILESTONES: [
+    {
+      year: "08/2025 – ACTUAL",
+      role: "Desarrollador de Software",
+      company: "PPM",
+      description:
+        "Ingeniero Frontend Senior enfocado en microfrontends, Clean Architecture y workflows asistidos por IA para mejorar velocidad de entrega y calidad de codigo.",
+      bullets: [
+        "Reduccion de deuda tecnica del 62% (40 → 15 items) via migracion a microfrontends y Clean Architecture.",
+        "Mejora de velocidad de entrega con herramientas IA: componentes 62% mas rapido (2h → 45m) y tests 50% mas rapido.",
+        "Liderazgo tecnico de un equipo de 4 ingenieros, revisando 5–6 PRs por semana.",
+      ],
+    },
+    {
+      year: "05/2024 – 08/2025",
+      role: "Desarrollador Full Stack (Frontend)",
+      company: "Produbanco",
+      description:
+        "Desarrollador full stack con foco frontend en un ecosistema multi-equipo, construyendo microfrontends y mejorando throughput de entrega.",
+      bullets: [
+        "Implementacion de arquitectura microfrontend con Webpack Module Federation en 8 equipos.",
+        "Incremento de velocidad de entrega ~30% mediante patrones compartidos y workflows optimizados.",
+        "Liderazgo tecnico de un equipo frontend de 6 ingenieros.",
+      ],
+    },
+    {
+      year: "05/2021 – 05/2024",
+      role: "Desarrollador Full Stack (Frontend)",
+      company: "Kin Analytics (Remoto)",
+      description:
+        "Desarrollador full stack remoto con fuerte foco frontend, entregando migraciones grandes y contribuyendo a modernizacion cloud.",
+      bullets: [
+        "Migracion Angular 7 → Angular 14 en aplicacion de 6 modulos usando Strangler Pattern.",
+        "Contribucion a migracion de plataforma PHP legacy a microservicios con AWS Lambda + Python.",
+        "Trabajo con stacks React, React Native, Angular, Python y Django.",
+      ],
+    },
+    {
+      year: "03/2019 – 05/2021",
+      role: "Analista de Tecnologia",
+      company: "Pérez Bustamante & Ponce",
+      description:
+        "Analista de tecnologia construyendo aplicaciones internas y automatizaciones para eficiencia operativa.",
+      bullets: [
+        "Desarrollo de apps internas con ASP.NET, C# y SQL Server.",
+        "Automatizacion de tareas operativas con scripting y mejoras de workflow.",
+      ],
+    },
+  ],
+};
+
+export const getExperienceTimelineConfig = (locale: Locale): ExperienceTimelineConfig => {
+  if (locale === I18N_LOCALES.ES) {
+    return EXPERIENCE_TIMELINE_CONFIG_ES;
+  }
+  return EXPERIENCE_TIMELINE_CONFIG_EN;
+};
+
+/** @deprecated Use getExperienceTimelineConfig(locale). */
+export const EXPERIENCE_TIMELINE_CONFIG = EXPERIENCE_TIMELINE_CONFIG_EN;

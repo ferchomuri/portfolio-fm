@@ -8,7 +8,7 @@ import {
   pulseNode,
   VIEWPORT_ONCE,
 } from "@/presentation/animations/MotionConfig";
-import { HERO_SECTION_CONFIG } from "@/presentation/pages/hero/HeroSectionConfig";
+import type { HeroSectionConfig } from "@/presentation/pages/hero/HeroSectionConfig";
 
 export interface HeroDashboardMetric {
   readonly value: string;
@@ -17,6 +17,7 @@ export interface HeroDashboardMetric {
 }
 
 export interface HeroSectionProps {
+  readonly sectionConfig: HeroSectionConfig;
   readonly fullName: string;
   readonly title: string;
   readonly email: string;
@@ -31,6 +32,7 @@ export interface HeroSectionProps {
 }
 
 export function HeroSection({
+  sectionConfig,
   fullName,
   title,
   email,
@@ -45,7 +47,7 @@ export function HeroSection({
 }: HeroSectionProps) {
   return (
     <section
-      id={HERO_SECTION_CONFIG.SECTION_ID}
+      id={sectionConfig.SECTION_ID}
       className="relative flex min-h-screen w-full flex-col justify-center overflow-hidden px-6 pt-24 md:px-12"
     >
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -67,7 +69,7 @@ export function HeroSection({
             className="inline-flex w-fit items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/5 px-3 py-1 font-mono text-xs font-semibold text-indigo-400"
           >
             <Radio className="h-3 w-3 animate-pulse" />
-            <span>{HERO_SECTION_CONFIG.STATUS_BADGE}</span>
+            <span>{sectionConfig.STATUS_BADGE}</span>
           </motion.div>
 
           <motion.div variants={fadeInUp} className="space-y-3">
@@ -96,7 +98,7 @@ export function HeroSection({
             variants={fadeInUp}
             className="max-w-xl text-base text-zinc-400 sm:text-lg leading-relaxed font-sans"
           >
-            {HERO_SECTION_CONFIG.DESCRIPTION}
+            {sectionConfig.DESCRIPTION}
           </motion.p>
 
           <motion.div
@@ -119,7 +121,7 @@ export function HeroSection({
               data-cursor="pointer"
             >
               <span className="h-1.5 w-1.5 rounded-full bg-indigo-400" />
-              <span className="font-mono text-xs">{HERO_SECTION_CONFIG.LINKEDIN_DISPLAY}</span>
+              <span className="font-mono text-xs">{sectionConfig.LINKEDIN_DISPLAY}</span>
             </a>
             <div className="flex items-center gap-2">
               <MapPin className="h-4 w-4 text-indigo-400" />
@@ -129,21 +131,21 @@ export function HeroSection({
 
           <motion.div variants={fadeInUp} className="flex flex-wrap gap-4 pt-2">
             <a
-              href={HERO_SECTION_CONFIG.PRIMARY_CTA.HREF}
+              href={sectionConfig.PRIMARY_CTA.HREF}
               className="group flex min-h-11 items-center gap-2 rounded-full bg-indigo-600 px-6 py-3 font-mono text-xs font-bold text-white shadow-lg shadow-indigo-600/20 transition-all duration-300 hover:bg-indigo-500 hover:scale-[1.03] active:scale-[0.98]"
               data-cursor="pointer"
             >
-              <span>{HERO_SECTION_CONFIG.PRIMARY_CTA.LABEL}</span>
+              <span>{sectionConfig.PRIMARY_CTA.LABEL}</span>
               <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
             </a>
 
             <a
-              href={HERO_SECTION_CONFIG.SECONDARY_CTA.HREF}
+              href={sectionConfig.SECONDARY_CTA.HREF}
               className="flex min-h-11 items-center gap-2 rounded-full border border-zinc-800 bg-zinc-950/80 px-6 py-3 font-mono text-xs font-bold text-zinc-300 transition-all duration-300 hover:border-zinc-700 hover:text-zinc-50 hover:bg-zinc-900 hover:scale-[1.03] active:scale-[0.98]"
               data-cursor="pointer"
             >
               <Play className="h-3.5 w-3.5 text-indigo-400" />
-              <span>{HERO_SECTION_CONFIG.SECONDARY_CTA.LABEL}</span>
+              <span>{sectionConfig.SECONDARY_CTA.LABEL}</span>
             </a>
           </motion.div>
         </motion.div>
@@ -203,12 +205,12 @@ export function HeroSection({
               <div className="flex items-center gap-2">
                 <span className="h-2.5 w-2.5 rounded-full bg-indigo-500 animate-pulse" />
                 <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-400">
-                  {HERO_SECTION_CONFIG.TELEMETRY_LABEL}
+                  {sectionConfig.TELEMETRY_LABEL}
                 </span>
               </div>
               <div className="flex items-center gap-1.5 font-mono text-[9px] text-emerald-400 bg-emerald-950/20 px-2 py-0.5 rounded-full border border-emerald-500/20">
                 <Radio className="h-2.5 w-2.5" />
-                <span>{HERO_SECTION_CONFIG.LIVE_FEED_LABEL}</span>
+                <span>{sectionConfig.LIVE_FEED_LABEL}</span>
               </div>
             </div>
 
@@ -253,7 +255,7 @@ export function HeroSection({
                   className="h-3.5 w-3.5 rounded-full bg-indigo-500 border border-black shadow-lg shadow-indigo-500/50"
                 />
                 <span className="mt-1 font-mono text-[8px] text-zinc-500">
-                  {HERO_SECTION_CONFIG.NODE_LABELS[0]}
+                  {sectionConfig.NODE_LABELS[0]}
                 </span>
               </div>
 
@@ -264,7 +266,7 @@ export function HeroSection({
                   className="h-3.5 w-3.5 rounded-full bg-emerald-500 border border-black shadow-lg shadow-emerald-500/50"
                 />
                 <span className="mt-1 font-mono text-[8px] text-zinc-500">
-                  {HERO_SECTION_CONFIG.NODE_LABELS[1]}
+                  {sectionConfig.NODE_LABELS[1]}
                 </span>
               </div>
 
@@ -275,7 +277,7 @@ export function HeroSection({
                   className="h-3.5 w-3.5 rounded-full bg-indigo-500 border border-black shadow-lg shadow-indigo-500/50"
                 />
                 <span className="mt-1 font-mono text-[8px] text-zinc-500">
-                  {HERO_SECTION_CONFIG.NODE_LABELS[2]}
+                  {sectionConfig.NODE_LABELS[2]}
                 </span>
               </div>
             </div>
@@ -284,7 +286,7 @@ export function HeroSection({
               <div className="mb-2 flex items-center justify-between border-b border-zinc-900 pb-1.5">
                 <div className="flex items-center gap-1.5">
                   <TerminalIcon className="h-3 w-3 text-indigo-400" />
-                  <span className="text-zinc-500">{HERO_SECTION_CONFIG.TERMINAL_TITLE}</span>
+                  <span className="text-zinc-500">{sectionConfig.TERMINAL_TITLE}</span>
                 </div>
                 <div className="flex items-center gap-1">
                   <span className="h-1.5 w-1.5 rounded-full bg-zinc-800" />
@@ -293,14 +295,14 @@ export function HeroSection({
                 </div>
               </div>
               <div className="space-y-1">
-                <div className="text-zinc-500">{HERO_SECTION_CONFIG.TERMINAL_COMMAND}</div>
+                <div className="text-zinc-500">{sectionConfig.TERMINAL_COMMAND}</div>
                 {terminalLine >= 1 && (
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     className="text-indigo-300"
                   >
-                    {HERO_SECTION_CONFIG.TERMINAL_LINES[0]}
+                    {sectionConfig.TERMINAL_LINES[0]}
                   </motion.div>
                 )}
                 {terminalLine >= 2 && (
@@ -309,7 +311,7 @@ export function HeroSection({
                     animate={{ opacity: 1 }}
                     className="text-emerald-400"
                   >
-                    {HERO_SECTION_CONFIG.TERMINAL_LINES[1]}
+                    {sectionConfig.TERMINAL_LINES[1]}
                   </motion.div>
                 )}
                 {terminalLine >= 3 && (
@@ -331,7 +333,7 @@ export function HeroSection({
             </div>
 
             <div className="mt-4 grid grid-cols-3 gap-2 border-t border-zinc-900 pt-3 text-center">
-              {HERO_SECTION_CONFIG.DASHBOARD_METRICS.map((metric) => (
+              {sectionConfig.DASHBOARD_METRICS.map((metric) => (
                 <div
                   key={metric.label}
                   className={`flex flex-col ${metric.label === "Delivery Speed" ? "border-x border-zinc-900" : ""}`}

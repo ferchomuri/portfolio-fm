@@ -1,31 +1,33 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AI_LAB_SECTION_CONFIG } from "@/presentation/pages/ai-lab/AILabSectionConfig";
+import type { AILabSectionConfig } from "@/presentation/pages/ai-lab/AILabSectionConfig";
 
 export interface AILabTerminalStreamState {
   readonly logs: readonly string[];
   readonly isStreaming: boolean;
 }
 
-export const useAILabTerminalStream = (): AILabTerminalStreamState => {
+export const useAILabTerminalStream = (
+  config: Pick<AILabSectionConfig, "TERMINAL_LOGS" | "LOG_INTERVAL_MS">,
+): AILabTerminalStreamState => {
   const [logs, setLogs] = useState<string[]>([]);
 
   useEffect(() => {
     const logInterval = setInterval(() => {
       setLogs((prev) => {
-        if (prev.length < AI_LAB_SECTION_CONFIG.TERMINAL_LOGS.length) {
-          return [...prev, AI_LAB_SECTION_CONFIG.TERMINAL_LOGS[prev.length]];
+        if (prev.length < config.TERMINAL_LOGS.length) {
+          return [...prev, config.TERMINAL_LOGS[prev.length] ?? ""];
         }
         return prev;
       });
-    }, AI_LAB_SECTION_CONFIG.LOG_INTERVAL_MS);
+    }, config.LOG_INTERVAL_MS);
 
     return () => clearInterval(logInterval);
-  }, []);
+  }, [config.LOG_INTERVAL_MS, config.TERMINAL_LOGS]);
 
   return {
     logs,
-    isStreaming: logs.length < AI_LAB_SECTION_CONFIG.TERMINAL_LOGS.length,
+    isStreaming: logs.length < config.TERMINAL_LOGS.length,
   };
 };

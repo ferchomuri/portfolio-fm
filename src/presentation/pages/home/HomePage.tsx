@@ -1,3 +1,5 @@
+"use client";
+
 import type { ReactNode } from "react";
 import { HOME_PAGE_CONFIG } from "@/presentation/pages/home/HomePageConfig";
 

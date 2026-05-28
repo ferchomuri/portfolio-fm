@@ -1,5 +1,6 @@
 import { SECTION_IDS } from "@/domain/constants/sections";
 import { PROFILE } from "@/data/repositories/profile-repository";
+import { I18N_LOCALES, type Locale } from "@/presentation/i18n";
 
 export const DEPLOYMENT_VISUAL_VARIANTS = {
   SOFTWARE_FACTORY_MFE: "software-factory-mfe",
@@ -21,7 +22,18 @@ export interface DeploymentProjectConfig {
   readonly visualVariant: DeploymentVisualVariant;
 }
 
-export const DEPLOYMENTS_SECTION_CONFIG = {
+export interface DeploymentsSectionConfig {
+  readonly SECTION_ID: string;
+  readonly EYEBROW: string;
+  readonly TITLE: string;
+  readonly DESCRIPTION: string;
+  readonly LAUNCH_LABEL: string;
+  readonly SOURCE_LABEL: string;
+  readonly SOURCE_UNAVAILABLE_TITLE: string;
+  readonly PROJECTS: readonly DeploymentProjectConfig[];
+}
+
+const DEPLOYMENTS_SECTION_CONFIG_EN: DeploymentsSectionConfig = {
   SECTION_ID: SECTION_IDS.DEPLOYMENTS,
   EYEBROW: "04 // CORE ENGINE DEPLOYMENTS",
   TITLE: "Selected Platforms & Projects",
@@ -65,4 +77,57 @@ export const DEPLOYMENTS_SECTION_CONFIG = {
       visualVariant: DEPLOYMENT_VISUAL_VARIANTS.DATA_ANALYTICS_CONSULTANCY_MIGRATION,
     },
   ] satisfies readonly DeploymentProjectConfig[],
+};
+
+const DEPLOYMENTS_SECTION_CONFIG_ES: DeploymentsSectionConfig = {
+  SECTION_ID: SECTION_IDS.DEPLOYMENTS,
+  EYEBROW: "04 // DESPLIEGUES DEL MOTOR PRINCIPAL",
+  TITLE: "Plataformas y Proyectos Seleccionados",
+  DESCRIPTION:
+    "Plataformas tecnicas desarrolladas en entornos clave. Basadas en diseno de arquitectura, estandares visuales e infraestructura modular.",
+  LAUNCH_LABEL: "ABRIR CONSOLA",
+  SOURCE_LABEL: "CODIGO FUENTE",
+  SOURCE_UNAVAILABLE_TITLE: "Codigo fuente no disponible",
+  PROJECTS: [
+    {
+      title: "Migracion de Microfrontends en Software Factory",
+      tag: "01 // ENTREGA SOFTWARE FACTORY",
+      category: "Modernizacion de Software Factory",
+      description:
+        "Migracion de microfrontends en modulos clave del producto con enfoque de Clean Architecture. Orientada a reducir deuda tecnica y mejorar la velocidad de entrega en un entorno de software factory.",
+      stack: ["Next.js", "Webpack Module Federation", "Clean Architecture", "Tailwind CSS"],
+      github: PROFILE.links.github,
+      demo: PROFILE.links.linkedin,
+      visualVariant: DEPLOYMENT_VISUAL_VARIANTS.SOFTWARE_FACTORY_MFE,
+    },
+    {
+      title: "Implementacion de Microfrontends para Entidad Bancaria",
+      tag: "02 // PLATAFORMA BANCARIA MFE",
+      category: "Plataforma Frontend Bancaria",
+      description:
+        "Implementacion de microfrontends con Webpack Module Federation en un ecosistema de multiples equipos. Enfocada en velocidad de entrega, estandares compartidos y colaboracion escalable para una entidad bancaria.",
+      stack: ["React", "Angular", "Webpack Module Federation", "Jest"],
+      github: PROFILE.links.github,
+      demo: PROFILE.links.linkedin,
+      visualVariant: DEPLOYMENT_VISUAL_VARIANTS.BANKING_ENTITY_MFE,
+    },
+    {
+      title: "Migracion Angular en Consultoria de Data Analytics (7 a 14)",
+      tag: "03 // MIGRACION EN CONSULTORIA",
+      category: "Modernizacion de Datos y Analitica",
+      description:
+        "Migracion completa de Angular 7 a Angular 14 en una aplicacion multimodulo usando Strangler Pattern. Permitio modernizacion incremental con minima disrupcion del negocio en una consultoria de datos y analitica.",
+      stack: ["Angular", "Strangler Pattern", "AWS Lambda", "Python"],
+      github: PROFILE.links.github,
+      demo: PROFILE.links.linkedin,
+      visualVariant: DEPLOYMENT_VISUAL_VARIANTS.DATA_ANALYTICS_CONSULTANCY_MIGRATION,
+    },
+  ] satisfies readonly DeploymentProjectConfig[],
+};
+
+export const getDeploymentsSectionConfig = (locale: Locale): DeploymentsSectionConfig => {
+  if (locale === I18N_LOCALES.ES) {
+    return DEPLOYMENTS_SECTION_CONFIG_ES;
+  }
+  return DEPLOYMENTS_SECTION_CONFIG_EN;
 };

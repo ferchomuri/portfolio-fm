@@ -2,8 +2,10 @@ import type { ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Zap } from "lucide-react";
 import { fadeInUp, staggerContainer, VIEWPORT_ONCE } from "@/presentation/animations/MotionConfig";
-import { CAPABILITIES_SECTION_CONFIG } from "@/presentation/pages/capabilities/CapabilitiesSectionConfig";
-import type { CapabilityItemConfig } from "@/presentation/pages/capabilities/CapabilitiesSectionConfig";
+import type {
+  CapabilitiesSectionConfig,
+  CapabilityItemConfig,
+} from "@/presentation/pages/capabilities/CapabilitiesSectionConfig";
 
 export interface CapabilityCategoryViewModel {
   readonly id: string;
@@ -12,6 +14,7 @@ export interface CapabilityCategoryViewModel {
 }
 
 export interface CapabilitiesSectionProps {
+  readonly sectionConfig: CapabilitiesSectionConfig;
   readonly categories: readonly CapabilityCategoryViewModel[];
   readonly activeCategory: string;
   readonly activeCapabilities: readonly CapabilityItemConfig[];
@@ -19,6 +22,7 @@ export interface CapabilitiesSectionProps {
 }
 
 export function CapabilitiesSection({
+  sectionConfig,
   categories,
   activeCategory,
   activeCapabilities,
@@ -26,7 +30,7 @@ export function CapabilitiesSection({
 }: CapabilitiesSectionProps) {
   return (
     <section
-      id={CAPABILITIES_SECTION_CONFIG.SECTION_ID}
+      id={sectionConfig.SECTION_ID}
       className="relative w-full overflow-hidden px-6 py-24 md:px-12"
     >
       <div className="max-w-7xl mx-auto w-full">
@@ -40,15 +44,15 @@ export function CapabilitiesSection({
           >
             <div className="flex items-center gap-2 text-indigo-400 font-mono text-xs font-bold tracking-widest">
               <Zap className="h-4 w-4" />
-              <span>{CAPABILITIES_SECTION_CONFIG.EYEBROW}</span>
+              <span>{sectionConfig.EYEBROW}</span>
             </div>
 
             <h2 className="text-3xl font-extrabold tracking-tight text-zinc-100 sm:text-4xl">
-              {CAPABILITIES_SECTION_CONFIG.TITLE}
+              {sectionConfig.TITLE}
             </h2>
 
             <p className="text-sm text-zinc-400 leading-relaxed font-sans">
-              {CAPABILITIES_SECTION_CONFIG.DESCRIPTION}
+              {sectionConfig.DESCRIPTION}
             </p>
 
             <div className="flex flex-col gap-2 rounded-xl border border-zinc-800/40 bg-zinc-950/50 p-2 backdrop-blur-sm">
