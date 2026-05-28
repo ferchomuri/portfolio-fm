@@ -9,7 +9,7 @@ export interface DeploymentsProjectVisualProps {
 }
 
 export function DeploymentsProjectVisual({ variant }: DeploymentsProjectVisualProps) {
-  if (variant === DEPLOYMENT_VISUAL_VARIANTS.PPM_MICROFRONTEND) {
+  if (variant === DEPLOYMENT_VISUAL_VARIANTS.SOFTWARE_FACTORY_MFE) {
     return (
       <div className="relative flex h-full w-full items-center justify-center bg-zinc-950 p-6">
         <div className="grid grid-cols-3 gap-3 w-full max-w-[280px]">
@@ -35,7 +35,7 @@ export function DeploymentsProjectVisual({ variant }: DeploymentsProjectVisualPr
     );
   }
 
-  if (variant === DEPLOYMENT_VISUAL_VARIANTS.PRODUBANCO_MFE) {
+  if (variant === DEPLOYMENT_VISUAL_VARIANTS.BANKING_ENTITY_MFE) {
     return (
       <div className="relative flex h-full w-full items-center justify-center bg-zinc-950 p-6">
         <div className="w-full max-w-[280px] space-y-4">

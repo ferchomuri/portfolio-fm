@@ -2,9 +2,9 @@ import { SECTION_IDS } from "@/domain/constants/sections";
 import { PROFILE } from "@/data/repositories/profile-repository";
 
 export const DEPLOYMENT_VISUAL_VARIANTS = {
-  PPM_MICROFRONTEND: "ppm-microfrontend",
-  PRODUBANCO_MFE: "produbanco-mfe",
-  KIN_ANGULAR_MIGRATION: "kin-angular-migration",
+  SOFTWARE_FACTORY_MFE: "software-factory-mfe",
+  BANKING_ENTITY_MFE: "banking-entity-mfe",
+  DATA_ANALYTICS_CONSULTANCY_MIGRATION: "data-analytics-consultancy-migration",
 } as const;
 
 export type DeploymentVisualVariant =
@@ -32,37 +32,37 @@ export const DEPLOYMENTS_SECTION_CONFIG = {
   SOURCE_UNAVAILABLE_TITLE: "Source code unavailable",
   PROJECTS: [
     {
-      title: "PPM Microfrontend Migration",
-      tag: "01 // MICROFRONTENDS DELIVERY",
-      category: "Platform Modernization",
+      title: "Software Factory Microfrontend Migration",
+      tag: "01 // SOFTWARE FACTORY DELIVERY",
+      category: "Software Factory Modernization",
       description:
-        "Microfrontend migration across key modules (checkout, memberships, product listing) with a Clean Architecture approach. Focused on reducing technical debt and improving delivery speed through AI-assisted workflows.",
+        "Microfrontend migration across key product modules with a Clean Architecture approach. Focused on reducing technical debt and improving delivery speed in a software factory environment.",
       stack: ["Next.js", "Webpack Module Federation", "Clean Architecture", "Tailwind CSS"],
       github: PROFILE.links.github,
       demo: PROFILE.links.linkedin,
-      visualVariant: DEPLOYMENT_VISUAL_VARIANTS.PPM_MICROFRONTEND,
+      visualVariant: DEPLOYMENT_VISUAL_VARIANTS.SOFTWARE_FACTORY_MFE,
     },
     {
-      title: "Produbanco Microfrontend Implementation",
-      tag: "02 // CROSS-TEAM MFE",
-      category: "Enterprise Frontend Platform",
+      title: "Banking Entity Microfrontend Implementation",
+      tag: "02 // BANKING MFE PLATFORM",
+      category: "Banking Frontend Platform",
       description:
-        "Microfrontend implementation using Webpack Module Federation in an ecosystem of 8 teams. Focused on delivery velocity, shared standards, and scalable collaboration.",
+        "Microfrontend implementation using Webpack Module Federation in a multi-team ecosystem. Focused on delivery velocity, shared standards, and scalable collaboration for a banking entity.",
       stack: ["React", "Angular", "Webpack Module Federation", "Jest"],
       github: PROFILE.links.github,
       demo: PROFILE.links.linkedin,
-      visualVariant: DEPLOYMENT_VISUAL_VARIANTS.PRODUBANCO_MFE,
+      visualVariant: DEPLOYMENT_VISUAL_VARIANTS.BANKING_ENTITY_MFE,
     },
     {
-      title: "Kin Analytics Angular Migration (7 → 14)",
-      tag: "03 // STRANGLER MIGRATION",
-      category: "Large-Scale Frontend Upgrade",
+      title: "Data Analytics Consultancy Angular Migration (7 to 14)",
+      tag: "03 // CONSULTANCY MIGRATION",
+      category: "Data and Analytics Modernization",
       description:
-        "Full migration from Angular 7 to Angular 14 across a 6-module application using the Strangler Pattern, enabling incremental modernization with minimal business disruption.",
+        "Full migration from Angular 7 to Angular 14 across a multi-module application using the Strangler Pattern, enabling incremental modernization with minimal business disruption in a data and analytics consultancy context.",
       stack: ["Angular", "Strangler Pattern", "AWS Lambda", "Python"],
       github: PROFILE.links.github,
       demo: PROFILE.links.linkedin,
-      visualVariant: DEPLOYMENT_VISUAL_VARIANTS.KIN_ANGULAR_MIGRATION,
+      visualVariant: DEPLOYMENT_VISUAL_VARIANTS.DATA_ANALYTICS_CONSULTANCY_MIGRATION,
     },
   ] satisfies readonly DeploymentProjectConfig[],
 };
