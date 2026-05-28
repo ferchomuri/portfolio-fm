@@ -1,7 +1,8 @@
-import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { act, fireEvent, screen, waitFor } from "@testing-library/react";
 import { sendContactMessage } from "@/data/repositories/contact-repository";
 import { CONTACT_CTA_CONFIG } from "@/presentation/pages/contact/ContactCTAConfig";
 import { ContactCTAContainer } from "@/presentation/pages/contact/ContactCTAContainer";
+import { renderWithI18n } from "@tests/utils/render-with-i18n";
 
 jest.mock("@/data/repositories/contact-repository");
 
@@ -19,7 +20,7 @@ const advanceBootSequence = (): void => {
 
 const renderContactFormReady = (): void => {
   jest.useFakeTimers();
-  render(<ContactCTAContainer />);
+  renderWithI18n(<ContactCTAContainer />);
   advanceBootSequence();
   jest.useRealTimers();
 };
@@ -36,7 +37,7 @@ describe("ContactCTAContainer", () => {
 
   it("should render boot sequence before showing the contact form", () => {
     jest.useFakeTimers();
-    render(<ContactCTAContainer />);
+    renderWithI18n(<ContactCTAContainer />);
 
     expect(screen.getByText(CONTACT_CTA_CONFIG.BOOT_COMMAND)).toBeInTheDocument();
     expect(screen.queryByLabelText(CONTACT_CTA_CONFIG.EMAIL_LABEL)).not.toBeInTheDocument();

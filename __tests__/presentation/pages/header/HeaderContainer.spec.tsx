@@ -1,5 +1,6 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import { HeaderContainer } from "@/presentation/pages/header/HeaderContainer";
+import { renderWithI18n } from "@tests/utils/render-with-i18n";
 
 describe("HeaderContainer", () => {
   beforeEach(() => {
@@ -7,7 +8,7 @@ describe("HeaderContainer", () => {
   });
 
   it("should open mobile navigation when menu toggle is clicked", () => {
-    render(<HeaderContainer />);
+    renderWithI18n(<HeaderContainer />);
 
     const toggle = screen.getByRole("button", { name: /open navigation menu/i });
     expect(toggle).toHaveAttribute("aria-expanded", "false");
@@ -20,7 +21,7 @@ describe("HeaderContainer", () => {
   });
 
   it("should close mobile navigation when close control is clicked", () => {
-    render(<HeaderContainer />);
+    renderWithI18n(<HeaderContainer />);
 
     fireEvent.click(screen.getByRole("button", { name: /open navigation menu/i }));
     fireEvent.click(screen.getAllByRole("button", { name: /close navigation menu/i })[0]);
@@ -30,7 +31,7 @@ describe("HeaderContainer", () => {
   });
 
   it("should expose section navigation targets", () => {
-    render(<HeaderContainer />);
+    renderWithI18n(<HeaderContainer />);
 
     expect(screen.getByRole("navigation", { name: /main navigation/i })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /dashboard/i })).toHaveAttribute("href", "#hero");

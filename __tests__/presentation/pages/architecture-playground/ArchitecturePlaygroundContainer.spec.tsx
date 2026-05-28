@@ -1,10 +1,11 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import { ARCHITECTURE_PLAYGROUND_CONFIG } from "@/presentation/pages/architecture-playground/ArchitecturePlaygroundConfig";
 import { ArchitecturePlaygroundContainer } from "@/presentation/pages/architecture-playground/ArchitecturePlaygroundContainer";
+import { renderWithI18n } from "@tests/utils/render-with-i18n";
 
 describe("ArchitecturePlaygroundContainer", () => {
   it("should render default microfrontend architecture mode", () => {
-    render(<ArchitecturePlaygroundContainer />);
+    renderWithI18n(<ArchitecturePlaygroundContainer />);
 
     expect(
       screen.getByText(ARCHITECTURE_PLAYGROUND_CONFIG.EXPLANATIONS.mfe),
@@ -13,7 +14,7 @@ describe("ArchitecturePlaygroundContainer", () => {
   });
 
   it("should switch architecture mode when a mode button is clicked", () => {
-    render(<ArchitecturePlaygroundContainer />);
+    renderWithI18n(<ArchitecturePlaygroundContainer />);
 
     fireEvent.click(
       screen.getByRole("button", { name: /clean architecture/i }),
@@ -29,7 +30,7 @@ describe("ArchitecturePlaygroundContainer", () => {
   });
 
   it("should update selected node telemetry when a node is clicked", () => {
-    render(<ArchitecturePlaygroundContainer />);
+    renderWithI18n(<ArchitecturePlaygroundContainer />);
 
     fireEvent.click(
       screen.getByRole("button", { name: /clean architecture/i }),
