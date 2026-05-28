@@ -1,12 +1,18 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { CustomCursor } from "@/presentation/components/custom-cursor/CustomCursor";
 import { useCustomCursor } from "@/presentation/components/custom-cursor/hooks/useCustomCursor";
 
 export function CustomCursorContainer() {
+  const [isMounted, setIsMounted] = useState(false);
   const viewModel = useCustomCursor();
 
-  if (!viewModel.isSupported) {
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted || !viewModel.isSupported) {
     return null;
   }
 

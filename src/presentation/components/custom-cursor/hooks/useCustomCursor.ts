@@ -16,12 +16,7 @@ export interface CustomCursorViewModel {
 export const useCustomCursor = (): CustomCursorViewModel => {
   const [isVisible, setIsVisible] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const [isSupported] = useState(() => {
-    if (typeof window === "undefined") {
-      return false;
-    }
-    return !window.matchMedia(CUSTOM_CURSOR_CONFIG.COARSE_POINTER_QUERY).matches;
-  });
+  const [isSupported, setIsSupported] = useState(false);
 
   const cursorX = useMotionValue<number>(CUSTOM_CURSOR_CONFIG.INITIAL_POSITION);
   const cursorY = useMotionValue<number>(CUSTOM_CURSOR_CONFIG.INITIAL_POSITION);
@@ -29,7 +24,11 @@ export const useCustomCursor = (): CustomCursorViewModel => {
   const cursorYSpring = useSpring(cursorY, CUSTOM_CURSOR_CONFIG.SPRING);
 
   useEffect(() => {
-    if (window.matchMedia(CUSTOM_CURSOR_CONFIG.COARSE_POINTER_QUERY).matches) {
+    const mediaQueryList = window.matchMedia(CUSTOM_CURSOR_CONFIG.COARSE_POINTER_QUERY);
+    const nextIsSupported = !mediaQueryList.matches;
+    setIsSupported(nextIsSupported);
+
+    if (!nextIsSupported) {
       return;
     }
 

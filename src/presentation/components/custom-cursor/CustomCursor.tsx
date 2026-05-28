@@ -18,7 +18,7 @@ export function CustomCursor({
   return (
     <>
       <motion.div
-        className={`pointer-events-none fixed top-0 left-0 z-30 h-[${CUSTOM_CURSOR_CONFIG.SPOTLIGHT_SIZE}px] w-[${CUSTOM_CURSOR_CONFIG.SPOTLIGHT_SIZE}px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-500/10 blur-[${CUSTOM_CURSOR_CONFIG.SPOTLIGHT_BLUR}px]`}
+        className="pointer-events-none fixed top-0 left-0 z-30 -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-500/10"
         style={{
           x: cursorXSpring,
           y: cursorYSpring,
